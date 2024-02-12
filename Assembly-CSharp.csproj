@@ -179,6 +179,7 @@
      <Compile Include="Assets\module-omicron\Tests\Touch\SimpleCanvasTouch.cs" />
      <Compile Include="Assets\Scripts\DrawLinks.cs" />
      <Compile Include="Assets\Scripts\PointCloud.cs" />
+     <Compile Include="Assets\Scripts\ToggleSolarSystem.cs" />
      <None Include="Assets\Shaders\PointCloudOpaque.shader" />
      <None Include="Assets\module-omicron\Shaders\Transparent-InvisibleShadowCaster.shader" />
      <None Include="Assets\module-omicron\CAVE2\Shaders\CAVE2-UI Default.shader" />
@@ -188,7 +189,6 @@
      <None Include="Assets\Data\constellations.txt" />
      <None Include="Assets\module-omicron\CAVE2\Shaders\CAVE2-UI Default Font.shader" />
      <None Include="Assets\module-omicron\Shaders\Font (Billboard).shader" />
-     <None Include="Assets\Shaders\Billboard.shader" />
      <None Include="Assets\module-omicron\CAVE2\Shaders\CAVE2ScreenMaskShader.shader" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>E:/School/UIC/23-24/CS 528/CS528-Project/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
