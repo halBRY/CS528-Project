@@ -28,25 +28,27 @@ Shader "PointCloud/SpherePointOpaque" {
 				float4 pos : SV_POSITION;
 				float4 color : COLOR0;
 				float3 normal : NORMAL;
-				float d : TEXCOORD0; // store distance to vertex
+				float d : TEXCOORD0; // Not actually a texcoord, just moving data
+				float4 posWorld : TEXCOORD1;
 			};
 
 			struct geomOut {
 				float4 pos : POSITION;
 				float4 color : COLOR0;
 				float3 normal : NORMAL;
+				float4 posWorld : TEXCOORD1;
 			};
 
 
-			//Vertex shader: computes normal wrt camera
-			vertexOut vert(vertexIn i, uint vertexID : SV_VertexID) {
-				vertexOut o;
-				o.pos = UnityObjectToClipPos(i.pos);
-				o.color = i.color;
-				o.normal = ObjSpaceViewDir(o.pos);
-				o.d = distance(_WorldSpaceCameraPos, mul(unity_ObjectToWorld, i.pos));
+			vertexOut vert(vertexIn inputObj, uint vertexID : SV_VertexID) {
+				vertexOut outputObj;
+				outputObj.posWorld = inputObj.pos;
+				outputObj.pos = UnityObjectToClipPos(inputObj.pos);
+				outputObj.color = inputObj.color;
+				outputObj.normal = ObjSpaceViewDir(outputObj.pos);
+				outputObj.d = distance(_WorldSpaceCameraPos, mul(unity_ObjectToWorld, inputObj.pos));
 
-				return o;
+				return outputObj;
 			}
 
 			float _Radius;
@@ -54,18 +56,19 @@ Shader "PointCloud/SpherePointOpaque" {
 			float _NumPolys;
 			float _Rotation;
 			[maxvertexcount(48)]
-			void geom(point vertexOut IN[1], inout TriangleStream<geomOut> OutputStream)
+			void geom(point vertexOut inputObj[1], inout TriangleStream<geomOut> OutputStream)
 			{
 
 				int nTriangles = floor(_NumPolys);
 
-				float dist = IN[0].d;
+				float dist = inputObj[0].d;
 
 				dist = (_ScaleFactor + (1 - _ScaleFactor) * dist) / 2.0;
 
-				geomOut OUT;
-				OUT.color = IN[0].color;
-				OUT.normal = IN[0].normal;
+				geomOut outputObj;
+				outputObj.posWorld = inputObj[0].posWorld;
+				outputObj.color = inputObj[0].color;
+				outputObj.normal = inputObj[0].normal;
 
 				float2 p[3];
 				p[0] = float2(0, 0);
@@ -86,8 +89,8 @@ Shader "PointCloud/SpherePointOpaque" {
 					}
 
 					for (int i = 0; i < 3; i++) {
-						OUT.pos = IN[0].pos + float4(p[i], 0, 0) * dist;
-						OutputStream.Append(OUT);
+						outputObj.pos = inputObj[0].pos + float4(p[i], 0, 0) * dist;
+						OutputStream.Append(outputObj);
 					}
 
 				}
@@ -95,20 +98,15 @@ Shader "PointCloud/SpherePointOpaque" {
 			}
 
 			float _Brightness;
-			float4 frag(geomOut i) : COLOR
+			float4 frag(geomOut inputObj) : COLOR
 			{
 				// A greater distance means a darker color
 				float4 tintColor = float4(_Brightness,_Brightness,_Brightness, 1);
-				float dist = distance(_WorldSpaceCameraPos, mul(unity_ObjectToWorld, i.pos));
+				float dist = distance(_WorldSpaceCameraPos, inputObj.posWorld);
 
-				if(dist > 1000)
-				{
-					return i.color * tintColor;
-				}
-				else
-				{
-					return i.color;
-				}
+				float4 newColor = inputObj.color * tintColor;
+
+				return lerp(inputObj.color, newColor, (dist/400));
 			}
 			ENDCG
 		}
