@@ -39,10 +39,10 @@ public class DrawLinks : MonoBehaviour
                 string[] data = lines[i].Split(' ');
 
                 // Count pairs for this constellation
-                int numConstellations = (data.Length / 2) - 1;
+                int numLines = (data.Length / 2) - 1;
 
                 // For each line pair...
-                for(int k = 1; k < numConstellations+1; k++)
+                for(int k = 1; k < numLines+1; k++)
                 {
                     GameObject myLine = Instantiate (linePrefab, new Vector3(0, 0, 0), Quaternion.identity);
                     Mesh Mesh;
@@ -59,10 +59,10 @@ public class DrawLinks : MonoBehaviour
                     Vector3[] vertices = new Vector3[2];
                     Color[] colors = new Color[2];
                     
-                    string[] coords_1 = data[k].Split(',');
-                    string[] coords_2 = data[k+1].Split(',');
+                    string[] coords_1 = data[k + (k-1)].Split(',');
+                    string[] coords_2 = data[k + k].Split(',');
 
-                    //string printout = string.Format("Lines {0} Data {1} has X{2} Y{3} Z{4}", i, j, coords[0], coords[1], coords[2]);
+                    //tring printout = string.Format("Constellation {0} has {1} lines, with points X{2} Y{3} Z{4}, X{5}, Y{6}, Z{7}", i, numLines, coords_1[0], coords_1[1], coords_1[2], coords_2[0], coords_2[1], coords_2[2]);
                     //Debug.Log(printout);
 
                     // Default to very far away, in case the parse fails
