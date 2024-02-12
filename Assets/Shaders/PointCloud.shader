@@ -1,4 +1,4 @@
-Shader "PointCloud/SpherePointOpaque" {
+Shader "PointCloud/SpherePoint" {
 	Properties{
 		//_Radius("Sphere Radius", float) = 0.01
 		_ScaleFactor("Scale Factor", Range(0,1)) = 1

@@ -180,7 +180,7 @@
      <Compile Include="Assets\Scripts\DrawLinks.cs" />
      <Compile Include="Assets\Scripts\PointCloud.cs" />
      <Compile Include="Assets\Scripts\ToggleSolarSystem.cs" />
-     <None Include="Assets\Shaders\PointCloudOpaque.shader" />
+     <None Include="Assets\Shaders\PointCloud.shader" />
      <None Include="Assets\module-omicron\Shaders\Transparent-InvisibleShadowCaster.shader" />
      <None Include="Assets\module-omicron\CAVE2\Shaders\CAVE2-UI Default.shader" />
      <None Include="Assets\module-omicron\Shaders\3D Text (Billboard).shader" />
