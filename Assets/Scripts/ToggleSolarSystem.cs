@@ -20,5 +20,10 @@ public class ToggleSolarSystem : MonoBehaviour
         {
             models.SetActive(!models.activeSelf);
         }
+
+        if (CAVE2.GetButtonDown(CAVE2.Button.ButtonUp))
+        {
+            models.SetActive(!models.activeSelf);
+        }
     }
 }
