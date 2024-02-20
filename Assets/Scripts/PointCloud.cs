@@ -12,9 +12,12 @@ public class PointCloud : MonoBehaviour
     public bool capStars;
     public int maxStarNum;
 
+    public TextAsset starData;
+
     // Start is called before the first frame update
     void Start()
     {
+        
         //Point Cloud 
         Mesh = new Mesh();
         Mesh.name = "StarPointCloud";
@@ -25,6 +28,7 @@ public class PointCloud : MonoBehaviour
 		meshRenderer.material = pointCloudMaterial;
 
         VertsFromCSV("Assets/Data/athyg_v31-1_cleaned.csv");
+        //VertsFromCSV("athyg_v31-1_cleaned.csv");
     }
 
     // Update is called once per frame
@@ -41,14 +45,21 @@ public class PointCloud : MonoBehaviour
         if(File.Exists(fileName))
         {
             // Each line is a star 
-            string[] lines = File.ReadAllLines(fileName);
+            //string[] lines = File.ReadAllLines(fileName);
+
+            starData = Resources.Load<TextAsset>("athyg_v31-1_cleaned");
+            //Debug.Log(starData);
+
+            //var splitFile = new string[] { "\r\n", "\r", "\n" };
+            string[] lines = starData.text.Split('\n');
+            
             int size = lines.Length;
 
             int[] indices = new int[size];
 		    Vector3[] vertices = new Vector3[size];
             Color[] colors = new Color[size];
             
-            int starsToAdd = size;
+            int starsToAdd = size - 1;
 
             if(capStars)
             {

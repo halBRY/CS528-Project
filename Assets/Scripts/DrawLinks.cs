@@ -10,6 +10,8 @@ public class DrawLinks : MonoBehaviour
     public Material LinesMaterial;
     public GameObject linePrefab;
 
+    public TextAsset starData;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +32,10 @@ public class DrawLinks : MonoBehaviour
         if(File.Exists(fileName))
         {
             // Each line is a constellation
-            string[] lines = File.ReadAllLines(fileName);
+            //string[] lines = File.ReadAllLines(fileName);
+
+            starData = Resources.Load<TextAsset>("constellations");
+            string[] lines = starData.text.Split('\n');
 
             // For each constellations, extract pairs of verts for lines
             for(int i = 0; i < lines.Length; i++)

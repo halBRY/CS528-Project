@@ -917,6 +917,7 @@ MonoBehaviour:
   LinesMaterial: {fileID: 2100000, guid: bcd3c9d01a468a842ae56d1804bc1c66, type: 2}
   linePrefab: {fileID: 5260529196234080437, guid: f6ed8164d596080438c957405fb76fab,
     type: 3}
+  starData: {fileID: 0}
 --- !u!4 &1512410794
 Transform:
   m_ObjectHideFlags: 0
@@ -1148,6 +1149,7 @@ MonoBehaviour:
   pointCloudMaterial: {fileID: 2100000, guid: 9e8bffafc1b7cb14db8cc338e4e141a1, type: 2}
   capStars: 0
   maxStarNum: 4
+  starData: {fileID: 0}
 --- !u!4 &1709699805
 Transform:
   m_ObjectHideFlags: 0
