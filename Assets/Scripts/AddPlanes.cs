@@ -4,7 +4,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class PointCloud : MonoBehaviour
+public class AddPlanes : MonoBehaviour
 {
     public Mesh Mesh;
     public Material pointCloudMaterial;
@@ -14,19 +14,11 @@ public class PointCloud : MonoBehaviour
 
     public TextAsset starData;
 
+    public GameObject planeBoard;
+
     // Start is called before the first frame update
     void Start()
     {
-        
-        //Point Cloud 
-        Mesh = new Mesh();
-        Mesh.name = "StarPointCloud";
-
-		MeshFilter meshFilter = gameObject.AddComponent<MeshFilter>();
-		meshFilter.mesh = Mesh;
-		MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
-		meshRenderer.material = pointCloudMaterial;
-
         VertsFromCSV("Assets/Data/athyg_v31-1_cleaned.csv");
         //VertsFromCSV("athyg_v31-1_cleaned.csv");
     }
@@ -34,13 +26,11 @@ public class PointCloud : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void VertsFromCSV(string fileName)
     {
-        Renderer rend = GetComponent<Renderer>();
-
         // Read in CSV
         if(File.Exists(fileName))
         {
@@ -54,10 +44,6 @@ public class PointCloud : MonoBehaviour
             string[] lines = starData.text.Split('\n');
             
             int size = lines.Length;
-
-            int[] indices = new int[size];
-		    Vector3[] vertices = new Vector3[size];
-            Color[] colors = new Color[size];
             
             int starsToAdd = size - 1;
 
@@ -77,8 +63,8 @@ public class PointCloud : MonoBehaviour
                 float y = float.Parse(data[2]);
                 float z = float.Parse(data[3]);
 
-                vertices[i-1] = new Vector3(x, y, z);
-                indices[i-1] = i-1;
+                GameObject myPlane = Instantiate (planeBoard, new Vector3(x,y,z),  Quaternion.Euler(-90f, 0f, 0f));
+                Renderer rend = myPlane.GetComponent<Renderer>();
 
                 // Really awful way of doing it but this is vertex color
                 Color myColor = new Color(0,0,0);
@@ -119,6 +105,9 @@ public class PointCloud : MonoBehaviour
                         break;
                 }
 
+                myPlane.transform.localScale = new Vector3(myRadius*.25f, myRadius*.25f, myRadius*.25f);
+                rend.material.SetColor("_Color", myColor);
+
                 //float H, S, V;
                 //Color.RGBToHSV(myColor, out H, out S, out V);
                 //V = float.Parse(data[5]);
@@ -128,17 +117,13 @@ public class PointCloud : MonoBehaviour
                 myColor.r = myColor.r / 255;
                 myColor.g = myColor.g / 255;
                 myColor.b = myColor.b / 255;
-                colors[i-1] = myColor;
+                //colors[i-1] = myColor;
             
-                rend.material.SetFloat("_Radius", myRadius);
-                rend.material.SetFloat("_Brightness", float.Parse(data[5]));
+                //rend.material.SetFloat("_Radius", myRadius);
+                //rend.material.SetFloat("_Brightness", float.Parse(data[5]));
+
+                //Draw a plane at the given transform
             }
-
-            Mesh.vertices = vertices;
-            Mesh.colors = colors;
-
-		    Mesh.indexFormat = IndexFormat.UInt32;
-		    Mesh.SetIndices(indices, MeshTopology.Points, 0);
 
             //Debug.Log("There are " + size + " stars");
         }

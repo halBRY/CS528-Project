@@ -900,7 +900,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1512410793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1126,6 +1126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1709699805}
   - component: {fileID: 1709699804}
+  - component: {fileID: 1709699806}
   m_Layer: 0
   m_Name: Stars
   m_TagString: Untagged
@@ -1140,14 +1141,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1709699803}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bad2252156d93e84bb561d20e89dc3ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Mesh: {fileID: 0}
   pointCloudMaterial: {fileID: 2100000, guid: 9e8bffafc1b7cb14db8cc338e4e141a1, type: 2}
-  capStars: 0
+  capStars: 1
   maxStarNum: 4
   starData: {fileID: 0}
 --- !u!4 &1709699805
@@ -1164,6 +1165,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1709699806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709699803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed62c0dd0f19bff4a8d33c84c8817550, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mesh: {fileID: 0}
+  pointCloudMaterial: {fileID: 0}
+  capStars: 1
+  maxStarNum: 5
+  starData: {fileID: 0}
+  planeBoard: {fileID: 3941503854349939696, guid: 6c3231c463c1c054cbc9d0b94d3945d2,
+    type: 3}
 --- !u!1 &1713352028
 GameObject:
   m_ObjectHideFlags: 0
