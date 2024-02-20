@@ -179,11 +179,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114000012058711088, guid: c1621f4dd1e8c2748a5a423aa7736d55,
-        type: 3}
-      propertyPath: navMode
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 224072241358244698, guid: c1621f4dd1e8c2748a5a423aa7736d55,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -208,6 +203,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012058711088, guid: c1621f4dd1e8c2748a5a423aa7736d55,
+        type: 3}
+      propertyPath: navMode
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4000013277262070, guid: c1621f4dd1e8c2748a5a423aa7736d55, type: 3}
       propertyPath: m_LocalPosition.y
@@ -900,7 +900,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1512410793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -917,7 +917,7 @@ MonoBehaviour:
   LinesMaterial: {fileID: 2100000, guid: bcd3c9d01a468a842ae56d1804bc1c66, type: 2}
   linePrefab: {fileID: 5260529196234080437, guid: f6ed8164d596080438c957405fb76fab,
     type: 3}
-  starData: {fileID: 0}
+  starData: {fileID: 4900000, guid: 8a011fef37fdc1d4f925cbed0fb05b24, type: 3}
 --- !u!4 &1512410794
 Transform:
   m_ObjectHideFlags: 0
@@ -1141,16 +1141,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1709699803}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bad2252156d93e84bb561d20e89dc3ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Mesh: {fileID: 0}
   pointCloudMaterial: {fileID: 2100000, guid: 9e8bffafc1b7cb14db8cc338e4e141a1, type: 2}
-  capStars: 1
+  capStars: 0
   maxStarNum: 4
-  starData: {fileID: 0}
+  starData: {fileID: 4900000, guid: 5c335e1e497753e4badbb267c3b8e7e3, type: 3}
 --- !u!4 &1709699805
 Transform:
   m_ObjectHideFlags: 0
@@ -1172,16 +1172,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1709699803}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed62c0dd0f19bff4a8d33c84c8817550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Mesh: {fileID: 0}
   pointCloudMaterial: {fileID: 0}
-  capStars: 1
+  capStars: 0
   maxStarNum: 5
-  starData: {fileID: 0}
+  starData: {fileID: 4900000, guid: 5c335e1e497753e4badbb267c3b8e7e3, type: 3}
   planeBoard: {fileID: 3941503854349939696, guid: 6c3231c463c1c054cbc9d0b94d3945d2,
     type: 3}
 --- !u!1 &1713352028
