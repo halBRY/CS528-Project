@@ -188,6 +188,7 @@
      <Compile Include="Assets\Scripts\ToggleSolarSystem.cs" />
      <None Include="Assets\Shaders\PointCloud.shader" />
      <None Include="Assets\module-omicron\Shaders\Transparent-InvisibleShadowCaster.shader" />
+     <None Include="Assets\Resources\constellations_korean.txt" />
      <None Include="Assets\module-omicron\CAVE2\Shaders\CAVE2-UI Default.shader" />
      <None Include="Assets\module-omicron\Shaders\3D Text (Billboard).shader" />
      <None Include="Assets\module-omicron\CAVE2\Examples\Generalized Perspective Projection\Shaders\StereoscopicShader.shader" />

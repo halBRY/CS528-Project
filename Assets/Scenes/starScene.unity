@@ -864,6 +864,7 @@ GameObject:
   - component: {fileID: 1512410794}
   - component: {fileID: 1512410793}
   - component: {fileID: 1512410795}
+  - component: {fileID: 1512410796}
   m_Layer: 0
   m_Name: Constellations
   m_TagString: Untagged
@@ -922,6 +923,29 @@ MonoBehaviour:
   isSpect: 0
   LineColor: {r: 0.5803922, g: 0.62859195, b: 0.8784314, a: 0}
   testNum: 59
+--- !u!114 &1512410796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512410792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb09dbe096eab1a4599994b8507402bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wandPointing: 0
+  wandTouching: 0
+  showHoverOver: 1
+  showPointingOver: 1
+  highlightScaler: {x: 1.05, y: 1.05, z: 1.05}
+  useSimplifiedMesh: 0
+  defaultMesh: {fileID: 0}
+  simpleMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  hoverOverMaterial: {fileID: 0}
+  strobing: 0
+  strobeSpeed: 0
 --- !u!1 &1705763447
 GameObject:
   m_ObjectHideFlags: 0
@@ -1191,7 +1215,7 @@ MonoBehaviour:
   Mesh: {fileID: 0}
   pointCloudMaterial: {fileID: 2100000, guid: 815cddec169b1ae4c830fbcaa70ba351, type: 2}
   capStars: 0
-  maxStarNum: 2
+  maxStarNum: 45
   scaleFactor: 3.28084
   starData: {fileID: 0}
   frameNumber: 0

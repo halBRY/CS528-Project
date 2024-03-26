@@ -60,8 +60,18 @@ Shader "PointCloud/DiskPoint" {
 				outputObj.posWorld = float4(velocityPos, 0);
 				outputObj.pos = UnityObjectToClipPos(velocityPos); // in screen space
 
-				// Color passthrough - TO DO: add spect/exo conditional
-				outputObj.color = inputObj.color;
+				float3 exoColor = inputObj.uv.xyz;
+
+				// Color passthrough
+				if(_isSpect == 1)
+				{
+					outputObj.color = inputObj.color;
+				}
+				else
+				{
+					outputObj.color = float4(exoColor, 1);
+				}
+
 
 				// Calculate new normal
 				outputObj.normal = ObjSpaceViewDir(outputObj.pos);
@@ -133,9 +143,9 @@ Shader "PointCloud/DiskPoint" {
 
 				float4 newColor = inputObj.color * tintColor;
 
-				return inputObj.color;
+				//return inputObj.color;
 
-				//return lerp(inputObj.color, newColor, (dist/400));
+				return lerp(inputObj.color, newColor, (dist/400));
 			}
 			ENDCG
 		}

@@ -34,7 +34,7 @@ public class PointCloudCustomVertData : MonoBehaviour
 		MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
 		meshRenderer.material = pointCloudMaterial;
 
-        VertsFromCSV("athyg_v31_cleaned");
+        VertsFromCSV("athyg_v31_cleaned_exo");
 
         meshRenderer.material.SetFloat("_ParsecScaleFactor", scaleFactor);
         meshRenderer.material.SetFloat("_frameNumber", frameNumber);
@@ -68,6 +68,19 @@ public class PointCloudCustomVertData : MonoBehaviour
         {
             scaleFactor += 1;
             meshRenderer.material.SetFloat("_ParsecScaleFactor", scaleFactor);
+        }
+
+        if(Input.GetKeyDown(KeyCode.B))
+        {
+            if(isSpect == 0)
+            {
+                isSpect = 1;
+            }
+            else if(isSpect == 1)
+            {
+                isSpect = 0;
+            }
+            meshRenderer.material.SetFloat("_isSpect", isSpect);
         }
     }
 
@@ -113,7 +126,8 @@ public class PointCloudCustomVertData : MonoBehaviour
         // 4 mag
         // 5 6 7 x, y, z
         // 8 9 10 vx, vy, vz
-        // 11 spectral type
+        // 11 exoplanet number
+        // 12 spectral type
         for(int i = 1; i < starsToAdd; i++)
         {
             string[] data = lines[i].Split(',');
@@ -132,12 +146,12 @@ public class PointCloudCustomVertData : MonoBehaviour
 
             // Check the first letter of spectal type 
             // Then color and size by spectral type
-            char checkSpect = data[11][1];
+            char checkSpect = data[12][1];
 
             // Handle Irregular cases
             if(checkSpect == '(')
             {
-                checkSpect = data[11][2];
+                checkSpect = data[12][2];
             }
             else if(checkSpect == 's') //subdwarf
             {
@@ -211,6 +225,68 @@ public class PointCloudCustomVertData : MonoBehaviour
                     break;
             }
 
+            float exoNum;
+            float result;
+
+            if (float.TryParse(data[11], out result))
+            {
+                exoNum = result;
+            }
+            else
+            {
+                exoNum = 0f;
+            }
+
+            //Debug.Log("My exoplanet number is " + exoNum);
+
+            float r;
+            float g;
+            float b;
+
+            switch (exoNum)
+            {
+                case 0:
+                    r = 50;
+                    g = 50;
+                    b = 50;
+                    break;
+                case 1:
+                    r = 37;
+                    g = 52;
+                    b = 148;
+                    break;
+                case 2:
+                    r = 44;
+                    g = 127;
+                    b = 184;
+                    break;
+                case 3:
+                    r = 65;
+                    g = 182;
+                    b = 196;
+                    break;
+                case 4:
+                    r = 127;
+                    g = 205;
+                    b = 187;
+                    break;
+                case 5:
+                    r = 199;
+                    g = 233;
+                    b = 180;
+                    break;
+                case 6:
+                    r = 255;
+                    g = 255;
+                    b = 204;
+                    break;
+                default:
+                    r = 30;
+                    g = 30;
+                    b = 30;
+                    break;
+            }
+
             // Convert to 0-1 RGB representation
             myColor.a = 1f;
             myColor.r = myColor.r / 255;
@@ -219,8 +295,12 @@ public class PointCloudCustomVertData : MonoBehaviour
     
             colors.Add(myColor);
 
+            r = r/255;
+            g = g/255;
+            b = b/255;
+
             //Holds exoplanet color scale, and radius of star. 
-            uv.Add(new Vector4(0,1,1,myRadius));
+            uv.Add(new Vector4(r,g,b,myRadius));
 
             // Calcualte brightness - TO DO
             rend.material.SetFloat("_Brightness", 1.0f);
