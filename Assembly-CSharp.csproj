@@ -178,8 +178,11 @@
      <Compile Include="Assets\module-omicron\Tests\Mocap\OmicronMocapObject.cs" />
      <Compile Include="Assets\module-omicron\Tests\Touch\SimpleCanvasTouch.cs" />
      <Compile Include="Assets\Scripts\AddPlanes.cs" />
+     <Compile Include="Assets\Scripts\AppManager.cs" />
      <Compile Include="Assets\Scripts\Billboard.cs" />
+     <Compile Include="Assets\Scripts\BillboardSprite.cs" />
      <Compile Include="Assets\Scripts\CameraCall.cs" />
+     <Compile Include="Assets\Scripts\ConstellationImage.cs" />
      <Compile Include="Assets\Scripts\DrawLinks.cs" />
      <Compile Include="Assets\Scripts\DrawLinksAsMesh.cs" />
      <Compile Include="Assets\Scripts\PointCloud.cs" />

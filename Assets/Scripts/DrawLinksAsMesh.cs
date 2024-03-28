@@ -12,13 +12,20 @@ public class DrawLinksAsMesh : MonoBehaviour
     public TextAsset starData;
 
     public float scaleFactor = 3.28084f; //Default to meters -> feet
+    public float parsecPerYearConversion = 0.00000102269f;
 
     public float frameNumber;
-    public float isSpect;
 
     public Color LineColor;
+    public Color HighlightColor;
+    public Color DimColor;
+
+    public GameObject myHighlightPlane;
 
     public int testNum;
+    public int highlightID;
+
+    public int[] constellationSubMeshIds;
 
     // Start is called before the first frame update
     void Start()
@@ -30,14 +37,14 @@ public class DrawLinksAsMesh : MonoBehaviour
 
 		MeshFilter meshFilter = gameObject.AddComponent<MeshFilter>();
 		meshFilter.mesh = Mesh;
-		MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
+		MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
 		meshRenderer.material = LinesMaterial;
 
         DrawConstellations("constellations_2");
 
         meshRenderer.material.SetFloat("_ParsecScaleFactor", scaleFactor);
         meshRenderer.material.SetFloat("_frameNumber", frameNumber);
-        meshRenderer.material.SetColor("_LineColor", LineColor);
+        //meshRenderer.material.SetColor("_LineColor", LineColor);
     }
 
     // Update is called once per frame
@@ -47,31 +54,119 @@ public class DrawLinksAsMesh : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.X))
         {
-            frameNumber += 0.001f;
+            frameNumber += 1000;
             meshRenderer.material.SetFloat("_frameNumber", frameNumber);
         }
 
         if(Input.GetKeyDown(KeyCode.Z))
         {
-            frameNumber -= 0.001f;
+            frameNumber -= 1000;
             meshRenderer.material.SetFloat("_frameNumber", frameNumber);
         }
 
         if(Input.GetKeyDown(KeyCode.N))
         {
-            scaleFactor -= 1;
+            scaleFactor -= 0.05f;
             meshRenderer.material.SetFloat("_ParsecScaleFactor", scaleFactor);
         }
 
         if(Input.GetKeyDown(KeyCode.M))
         {
-            scaleFactor += 1;
+            scaleFactor += 0.05f;
             meshRenderer.material.SetFloat("_ParsecScaleFactor", scaleFactor);
         }
 
         if(Input.GetKeyDown(KeyCode.T))
         {
             meshRenderer.enabled = !meshRenderer.enabled;
+        }
+
+        //Highlight the chosen constellation
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Debug.Log("Highlight On");
+            myHighlightPlane.SetActive(true);
+
+            List<Color> colors = new List<Color>();
+
+            for(int i = 0; i < Mesh.vertices.Length; i++)
+            {
+                // Not selected constellation
+                if(i < constellationSubMeshIds[highlightID] || i >= constellationSubMeshIds[highlightID + 1])
+                {
+                    colors.Add(DimColor);
+                }
+                else
+                {
+                    colors.Add(HighlightColor);
+                }
+            }
+            
+            //This is annoying but I think it must be done...
+            List<Vector3> vertices = new List<Vector3>();
+            List<Vector3> normals = new List<Vector3>();
+            List<int> indices = new List<int>();
+
+            Mesh.GetVertices(vertices);
+            Mesh.GetNormals(normals);
+            Mesh.GetIndices(indices, 0);
+
+            Destroy(Mesh);
+
+            Mesh = new Mesh();
+            Mesh.name = "StarLines";
+
+            MeshFilter meshFilter = gameObject.GetComponent<MeshFilter>();
+            meshFilter.mesh = Mesh;
+
+            Mesh.SetVertices(vertices);
+            Mesh.SetNormals(normals);
+            Mesh.SetColors(colors);
+
+            int[] indicesArr = indices.ToArray();
+            Mesh.indexFormat = IndexFormat.UInt32;
+
+            Mesh.SetIndices(indicesArr, MeshTopology.Lines, 0);
+        }
+
+        //Deselect constellation
+        if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Debug.Log("Highlight Off");
+            myHighlightPlane.SetActive(false);
+
+            List<Color> colors = new List<Color>();
+
+            for(int i = 0; i < Mesh.vertices.Length; i++)
+            {
+                colors.Add(LineColor);
+            }
+
+            //This is annoying but I think it must be done...
+            List<Vector3> vertices = new List<Vector3>();
+            List<Vector3> normals = new List<Vector3>();
+            List<int> indices = new List<int>();
+
+            Mesh.GetVertices(vertices);
+            Mesh.GetNormals(normals);
+            Mesh.GetIndices(indices, 0);
+
+            Destroy(Mesh);
+
+            Mesh = new Mesh();
+            Mesh.name = "StarLines";
+
+            MeshFilter meshFilter = gameObject.GetComponent<MeshFilter>();
+            meshFilter.mesh = Mesh;
+
+            Mesh.SetVertices(vertices);
+            Mesh.SetNormals(normals);
+            Mesh.SetColors(colors);
+
+            int[] indicesArr = indices.ToArray();
+            Mesh.indexFormat = IndexFormat.UInt32;
+
+            Mesh.SetIndices(indicesArr, MeshTopology.Lines, 0);
         }
     }
 
@@ -88,15 +183,21 @@ public class DrawLinksAsMesh : MonoBehaviour
         List<int> indices = new List<int>();
         List<Vector3> vertices = new List<Vector3>();
         List<Vector3> normals = new List<Vector3>();
+        List<Color> colors = new List<Color>();
 
         //Keep track of when stars are missing
         bool DropThisLine = false;
         int linesAdded = 0;
 
+        constellationSubMeshIds = new int[lines.Length];
+
         // For each constellations, extract pairs of verts for lines
         for(int i = 0; i < lines.Length; i++)
         //for(int i = testNum; i < testNum+1; i++)
         {
+            //track submesh id
+            constellationSubMeshIds[i] = linesAdded * 2;
+
             // Individual star coords are separated by a space
             string[] myConstellationStars = lines[i].Split(' ');
 
@@ -107,7 +208,7 @@ public class DrawLinksAsMesh : MonoBehaviour
 
             // For each line pair...
             for(int k = 1; k < numPairs + 1; k++)
-            {
+            {   
                 //Reset missing star flag
                 DropThisLine = false;
 
@@ -184,6 +285,11 @@ public class DrawLinksAsMesh : MonoBehaviour
                 {
                     DropThisLine = true;
                 }
+
+                vx *= parsecPerYearConversion;
+                vy *= parsecPerYearConversion;
+                vz *= parsecPerYearConversion;
+
                 verticesTemp[0] = new Vector3(x, y, z);
                 normalsTemp[0] = new Vector3(vx, vy, vz);
                             
@@ -243,6 +349,11 @@ public class DrawLinksAsMesh : MonoBehaviour
                 {
                     DropThisLine = true;
                 }
+
+                vx *= parsecPerYearConversion;
+                vy *= parsecPerYearConversion;
+                vz *= parsecPerYearConversion;
+
                 verticesTemp[1] = new Vector3(x, y, z);
                 normalsTemp[1] = new Vector3(vx, vy, vz);
 
@@ -253,6 +364,10 @@ public class DrawLinksAsMesh : MonoBehaviour
 
                     vertices.Add(verticesTemp[1]);
                     normals.Add(normalsTemp[1]);
+
+                    // Line vertex colors
+                    colors.Add(LineColor);
+                    colors.Add(LineColor);
 
                     linesAdded++;
                     myLinesAdded++;
@@ -271,9 +386,11 @@ public class DrawLinksAsMesh : MonoBehaviour
         // Create mesh 
         Mesh.SetVertices(vertices);
         Mesh.SetNormals(normals);
+        Mesh.SetColors(colors);
 
         int[] indicesArr = indices.ToArray();
         Mesh.indexFormat = IndexFormat.UInt32;
+
         Mesh.SetIndices(indicesArr, MeshTopology.Lines, 0);
     }
 }

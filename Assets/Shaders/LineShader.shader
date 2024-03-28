@@ -4,7 +4,6 @@
     {
         _ParsecScaleFactor("Parsec Scale Factor", Float) = 0
         _frameNumber("Frame Number", Float) = 0
-        _LineColor ("Line Color", Color) = (0,1,1,1)
     }
     SubShader
     {
@@ -25,21 +24,24 @@
 			struct vertexIn {
 				float4 pos : POSITION;
 				float4 normal : NORMAL; // holding velocity
+                float4 color : COLOR;
 			};
 
             // Varyings
 			struct vertexOut {
 				float4 pos : POSITION;
+                float4 color: COLOR;
 			};
 
             // Uniforms
-            float4 _LineColor;
             float _ParsecScaleFactor;
 			float _frameNumber;
 
             vertexOut vert (vertexIn input)
             {
                 vertexOut output;
+
+                output.color = input.color; //color passthrough
 
                 // Position calculations
 				float3 scaledPos = input.pos * _ParsecScaleFactor; // Scale from meters to feet
@@ -52,7 +54,7 @@
 
             float4 frag (vertexOut input) : COLOR
             {
-                return _LineColor;
+                return input.color;
             }
             ENDCG
         }

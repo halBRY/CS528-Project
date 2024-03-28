@@ -13,6 +13,7 @@ public class PointCloudCustomVertData : MonoBehaviour
     public int maxStarNum;
 
     public float scaleFactor = 3.28084f; //Default to meters -> feet
+    public float parsecPerYearConversion = 0.00000102269f;
 
     public TextAsset starData;
 
@@ -48,25 +49,25 @@ public class PointCloudCustomVertData : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.X))
         {
-            frameNumber += 0.001f;
+            frameNumber += 1000;
             meshRenderer.material.SetFloat("_frameNumber", frameNumber);
         }
 
         if(Input.GetKeyDown(KeyCode.Z))
         {
-            frameNumber -= 0.001f;
+            frameNumber -= 1000;
             meshRenderer.material.SetFloat("_frameNumber", frameNumber);
         }
 
         if(Input.GetKeyDown(KeyCode.N))
         {
-            scaleFactor -= 1;
+            scaleFactor -= 0.05f;
             meshRenderer.material.SetFloat("_ParsecScaleFactor", scaleFactor);
         }
 
         if(Input.GetKeyDown(KeyCode.M))
         {
-            scaleFactor += 1;
+            scaleFactor += 0.05f;
             meshRenderer.material.SetFloat("_ParsecScaleFactor", scaleFactor);
         }
 
@@ -136,9 +137,9 @@ public class PointCloudCustomVertData : MonoBehaviour
             float y = float.Parse(data[6]);
             float z = float.Parse(data[7]);
 
-            float vx = float.Parse(data[8]);
-            float vy = float.Parse(data[9]);
-            float vz = float.Parse(data[10]);
+            float vx = float.Parse(data[8]) * parsecPerYearConversion;
+            float vy = float.Parse(data[9]) * parsecPerYearConversion;
+            float vz = float.Parse(data[10]) * parsecPerYearConversion;
 
             indices[i-1] = i-1;
             vertices.Add(new Vector3(x,y,z));
