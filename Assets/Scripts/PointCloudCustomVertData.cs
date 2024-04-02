@@ -35,7 +35,7 @@ public class PointCloudCustomVertData : MonoBehaviour
 		MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
 		meshRenderer.material = pointCloudMaterial;
 
-        VertsFromCSV("athyg_v31_cleaned_exo");
+        VertsFromCSV("athyg_v31_cleaned_exo_all_stars");
 
         meshRenderer.material.SetFloat("_ParsecScaleFactor", scaleFactor);
         meshRenderer.material.SetFloat("_frameNumber", frameNumber);

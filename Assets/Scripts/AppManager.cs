@@ -6,6 +6,11 @@ public class AppManager : MonoBehaviour
 {
     public GameObject myPlayer;
 
+    public float distance;
+
+    public Material darkSky;
+    public Material highlightSky;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,5 +25,19 @@ public class AppManager : MonoBehaviour
             myPlayer.transform.position = new Vector3(0f, 0.52f, -6f);
             myPlayer.transform.rotation = Quaternion.identity;
         }
+
+        distance = Vector3.Distance(myPlayer.transform.position, new Vector3(0f, 1f, 0f)); //Sol location
+        Debug.Log("Distance from Sol: " + distance);
+
+
+        if(distance < 30)
+        {
+            RenderSettings.skybox = darkSky;
+        }
+        else
+        {
+            RenderSettings.skybox = darkSky;
+        }
+
     }
 }
