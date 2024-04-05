@@ -8,17 +8,20 @@ public class PointCloudCustomVertData : MonoBehaviour
 {
     public Mesh Mesh;
     public Material pointCloudMaterial;
+    public MeshRenderer meshRenderer;
 
     public bool capStars;
     public int maxStarNum;
 
-    public float scaleFactor = 3.28084f; //Default to meters -> feet
+    public float scaleFactor = 0.30478512648f; //Default to meters -> feet
     public float parsecPerYearConversion = 0.00000102269f;
 
     public TextAsset starData;
 
     public float frameNumber;
     public float isSpect;
+
+    public AppManager appManager;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +35,7 @@ public class PointCloudCustomVertData : MonoBehaviour
 
 		MeshFilter meshFilter = gameObject.AddComponent<MeshFilter>();
 		meshFilter.mesh = Mesh;
-		MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
+		meshRenderer = gameObject.AddComponent<MeshRenderer>();
 		meshRenderer.material = pointCloudMaterial;
 
         VertsFromCSV("athyg_v31_cleaned_exo_all_stars");
@@ -45,44 +48,64 @@ public class PointCloudCustomVertData : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
 
-        if(Input.GetKeyDown(KeyCode.X))
+    }
+
+    public float getFrameNumber()
+    {
+        return frameNumber;
+    }
+
+    public float getScaleFactor()
+    {
+        return scaleFactor;
+    }
+
+    // 0 = forward in time
+    // 1 = backward in time
+    public void updateFrameNumber(int direction)
+    {
+        if(direction == 0)
         {
-            frameNumber += 1000;
+            frameNumber += 500;
             meshRenderer.material.SetFloat("_frameNumber", frameNumber);
         }
 
-        if(Input.GetKeyDown(KeyCode.Z))
+        if(direction == 1)
         {
-            frameNumber -= 1000;
+            frameNumber -= 500;
             meshRenderer.material.SetFloat("_frameNumber", frameNumber);
         }
+    }
 
-        if(Input.GetKeyDown(KeyCode.N))
+    // 0 = parsec maps to a larger unit
+    // 1 = parsec maps to a smaller unit
+    public void updateScaleFactor(int direction)
+    {
+        if(direction == 0)
         {
             scaleFactor -= 0.05f;
             meshRenderer.material.SetFloat("_ParsecScaleFactor", scaleFactor);
         }
 
-        if(Input.GetKeyDown(KeyCode.M))
+        if(direction == 1)
         {
             scaleFactor += 0.05f;
             meshRenderer.material.SetFloat("_ParsecScaleFactor", scaleFactor);
         }
+    }
 
-        if(Input.GetKeyDown(KeyCode.B))
+    public void updateColorScale()
+    {
+        if(isSpect == 0)
         {
-            if(isSpect == 0)
-            {
-                isSpect = 1;
-            }
-            else if(isSpect == 1)
-            {
-                isSpect = 0;
-            }
-            meshRenderer.material.SetFloat("_isSpect", isSpect);
+            isSpect = 1;
         }
+        else if(isSpect == 1)
+        {
+            isSpect = 0;
+        }
+        meshRenderer.material.SetFloat("_isSpect", isSpect);
     }
 
     private void VertsFromCSV(string fileName)
