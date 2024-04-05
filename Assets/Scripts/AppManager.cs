@@ -7,6 +7,7 @@ using TMPro;
 public class AppManager : MonoBehaviour
 {
     public GameObject myPlayer;
+    public GameObject myHeadTrack;
     public DrawLinksAsMesh myConstellations;
     public PointCloudCustomVertData myStars;
 
@@ -15,13 +16,17 @@ public class AppManager : MonoBehaviour
     public GameObject ScaleGUI;
     public GameObject DistGUI;
 
-    public TMP_Text timeText;
-    public TMP_Text scaleText;
-    public TMP_Text distText;
+    public GameObject ColorGUI;
+    public GameObject SpectGUI;
+    public GameObject ExoGUI;
 
-    public string timeString;
-    public string scaleString;
-    public string distString;
+    private TMP_Text timeText;
+    private TMP_Text scaleText;
+    private TMP_Text distText;
+
+    private string timeString;
+    private string scaleString;
+    private string distString;
 
     public float distance;
 
@@ -30,12 +35,13 @@ public class AppManager : MonoBehaviour
 
     public TextAsset[] constSets;
 
-    public int actionMode = 0;
-    public int lastTimeDirection = 0;
+    private int actionMode = 0;
+    private int lastTimeDirection = 0;
 
     public int highlightID = 0;
 
-    public bool isPaused = true;
+    private bool isPaused = true;
+    private bool activeColorScale = true;
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +50,7 @@ public class AppManager : MonoBehaviour
         timeString = "Present";
 
         scaleText = ScaleGUI.GetComponent<TMP_Text>();
-        scaleString = "1 ft. = 1 parsec";
+        scaleText.text = "1 ft. = 1 parsec";
 
         distText = DistGUI.GetComponent<TMP_Text>();
         distString = " ft. away from Sol";
@@ -53,7 +59,7 @@ public class AppManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        distance = Vector3.Distance(myPlayer.transform.position, new Vector3(0f, 1f, 0f)); //Sol location
+        distance = Vector3.Distance(myHeadTrack.transform.position, new Vector3(0f, 1f, 0f)); //Sol location
         distText.text = ((distance * myStars.getScaleFactor()) / 10) + distString;
 
         switch(actionMode)
@@ -112,7 +118,7 @@ public class AppManager : MonoBehaviour
                     break;
 
                 case 3:
-                    Debug.Log("Hide GUI elements that don't exist yet lol");
+                    ToggleAllGUI();
                     break;
 
                 default:
@@ -210,6 +216,7 @@ public class AppManager : MonoBehaviour
 
                 case 3:
                     myStars.updateColorScale();
+                    UpdateColorGUI();
                     break;
                 
                 default:
@@ -221,11 +228,6 @@ public class AppManager : MonoBehaviour
         {
             myStars.updateFrameNumber(lastTimeDirection);
             myConstellations.updateFrameNumber(lastTimeDirection);
-        }
-
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("My Action Mode is " + actionMode);
         }
 
         //Highlight the chosen constellation
@@ -270,6 +272,21 @@ public class AppManager : MonoBehaviour
         else if(highlightID < 0)
         {
             highlightID = maxID;
+        }
+    }
+
+    public void UpdateColorGUI()
+    {
+        activeColorScale = !activeColorScale;
+        if(activeColorScale)
+        {
+            ExoGUI.SetActive(false);
+            SpectGUI.SetActive(true);
+        }
+        else
+        {
+            ExoGUI.SetActive(true);
+            SpectGUI.SetActive(false);
         }
     }
 
@@ -323,32 +340,32 @@ public class AppManager : MonoBehaviour
 
     public void UpdateActionTime(bool toggle)
     {
-        HideAllGUI();
         actionMode = 0;
-        TimeGUI.SetActive(true);
     }
 
     public void UpdateActionScale(bool toggle)
     {
-        HideAllGUI();
         actionMode = 1;
-        ScaleGUI.SetActive(true);
+        isPaused = true;
     }
 
     public void UpdateActionHighlight(bool toggle)
     {
         actionMode = 2;
+        isPaused = true;
     }
 
     public void UpdateActionQuick(bool toggle)
     {
         actionMode = 3;
+        isPaused = true;
     }
 
-    public void HideAllGUI()
+    public void ToggleAllGUI()
     {
-        TimeGUI.SetActive(false);
-        ScaleGUI.SetActive(false);
-        DistGUI.SetActive(false);
+        TimeGUI.SetActive(!TimeGUI.activeSelf);
+        ScaleGUI.SetActive(!ScaleGUI.activeSelf);
+        DistGUI.SetActive(!DistGUI.activeSelf);
+        ColorGUI.SetActive(!ColorGUI.activeSelf);
     }
 }
