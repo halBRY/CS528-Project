@@ -85,7 +85,8 @@ public class AppManager : MonoBehaviour
         float adjustedScale = (myScale/0.30478512648f) / 10;
         scaleText.text = adjustedScale + " ft. = 1 parsec";
 
-        if(Input.GetKeyDown(KeyCode.M))
+        //if(Input.GetKeyDown(KeyCode.M))
+        if(CAVE2.GetButtonDown(CAVE2.Button.Button5))
         {
             Debug.Log("Setting mode to 3, holding mode " + actionMode);
             tempActionMode = actionMode;
@@ -93,7 +94,8 @@ public class AppManager : MonoBehaviour
         }
 
         
-        if (Input.GetKeyUp(KeyCode.M))
+        //if (Input.GetKeyUp(KeyCode.M))
+        if(CAVE2.GetButtonUp(CAVE2.Button.Button5))
         {
             Debug.Log("Setting action mode back to " + tempActionMode);
             actionMode = tempActionMode;
@@ -104,7 +106,8 @@ public class AppManager : MonoBehaviour
         // 1 - increase scale
         // 2 - cycle through constellations
         // 3 - toggle GUI elements
-        if(Input.GetKeyDown(KeyCode.X))
+        //if(Input.GetKeyDown(KeyCode.X))
+        if(CAVE2.GetButtonDown(CAVE2.Button.ButtonRight))
         {
             switch (actionMode)
             {
@@ -138,7 +141,8 @@ public class AppManager : MonoBehaviour
         // 1 - decrease scale
         // 2 - cycle through constellations
         // 3 - toggle constellation lines elements
-        if(Input.GetKeyDown(KeyCode.Z))
+        //if(Input.GetKeyDown(KeyCode.Z))
+        if(CAVE2.GetButtonDown(CAVE2.Button.ButtonLeft))
         {
             switch (actionMode)
             {
@@ -172,7 +176,8 @@ public class AppManager : MonoBehaviour
         // 1 - change distance from sol units
         // 2 - cycle through constellations
         // 3 - reset position
-        if(Input.GetKeyDown(KeyCode.C))
+        //if(Input.GetKeyDown(KeyCode.C))
+        if(CAVE2.GetButtonDown(CAVE2.Button.ButtonUp))
         {
             switch (actionMode)
             {
@@ -204,7 +209,8 @@ public class AppManager : MonoBehaviour
         // 1 - ...???
         // 2 - cycle through constellations
         // 3 - update color scale
-        if(Input.GetKeyDown(KeyCode.V))
+        //if(Input.GetKeyDown(KeyCode.V))
+        if(CAVE2.GetButtonDown(CAVE2.Button.ButtonDown))
         {
             switch (actionMode)
             {

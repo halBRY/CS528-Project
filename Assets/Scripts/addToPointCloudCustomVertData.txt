@@ -1,0 +1,8 @@
+        if( CAVE2Manager.GetMachineName() == "ORION")
+        {
+           meshRenderer.material.SetFloat("_isBack", 1);
+        }
+        else 
+        {
+            meshRenderer.material.SetFloat("_isBack", 0);
+        }
