@@ -183,6 +183,7 @@
      <Compile Include="Assets\Scripts\ConstellationImage.cs" />
      <Compile Include="Assets\Scripts\constSetUI.cs" />
      <Compile Include="Assets\Scripts\DrawLinksAsMesh.cs" />
+     <Compile Include="Assets\Scripts\ModifiedGrabbable.cs" />
      <Compile Include="Assets\Scripts\PointCloudCustomVertData.cs" />
      <Compile Include="Assets\Scripts\unused\AddPlanes.cs" />
      <Compile Include="Assets\Scripts\unused\BillboardSprite.cs" />

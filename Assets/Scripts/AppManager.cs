@@ -15,6 +15,7 @@ public class AppManager : MonoBehaviour
     public GameObject TimeGUI;
     public GameObject ScaleGUI;
     public GameObject DistGUI;
+    public GameObject HighlightGUI;
 
     public GameObject ColorGUI;
     public GameObject SpectGUI;
@@ -37,6 +38,7 @@ public class AppManager : MonoBehaviour
 
     private int actionMode = 0;
     private int lastTimeDirection = 0;
+    private int tempActionMode = 0;
 
     public int highlightID = 0;
 
@@ -62,34 +64,39 @@ public class AppManager : MonoBehaviour
         distance = Vector3.Distance(myHeadTrack.transform.position, new Vector3(0f, 1f, 0f)); //Sol location
         distText.text = ((distance * myStars.getScaleFactor()) / 10) + distString;
 
-        switch(actionMode)
+        float myFrame = myStars.getFrameNumber();
+    
+        if(myFrame == 0)
         {
-            case 0:
-                float myFrame = myStars.getFrameNumber();
-            
-                if(myFrame == 0)
-                {
-                    timeString = "Present";
-                }
-                else if(myFrame > 0)
-                {
-                    timeString = (int) myFrame + " years ahead";
-                }
-                else if(myFrame < 0)
-                {
-                    timeString = Mathf.Abs( (int) myFrame) + " years ago";
-                }
-                timeText.text = timeString;
-                break;
+            timeString = "Present";
+        }
+        else if(myFrame > 0)
+        {
+            timeString = (int) myFrame + " years ahead";
+        }
+        else if(myFrame < 0)
+        {
+            timeString = Mathf.Abs( (int) myFrame) + " years ago";
+        }
 
-            case 1:
-                float myScale = myStars.getScaleFactor();
-                float adjustedScale = (myScale/0.30478512648f) / 10;
-                scaleText.text = adjustedScale + " ft. = 1 parsec";
+        timeText.text = timeString;
 
-                break;
-            default:
-                break;
+        float myScale = myStars.getScaleFactor();
+        float adjustedScale = (myScale/0.30478512648f) / 10;
+        scaleText.text = adjustedScale + " ft. = 1 parsec";
+
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            Debug.Log("Setting mode to 3, holding mode " + actionMode);
+            tempActionMode = actionMode;
+            actionMode = 3;
+        }
+
+        
+        if (Input.GetKeyUp(KeyCode.M))
+        {
+            Debug.Log("Setting action mode back to " + tempActionMode);
+            actionMode = tempActionMode;
         }
 
         //cave button right
@@ -353,6 +360,7 @@ public class AppManager : MonoBehaviour
     {
         actionMode = 2;
         isPaused = true;
+        HighlightGUI.SetActive(true);
     }
 
     public void UpdateActionQuick(bool toggle)
@@ -367,5 +375,14 @@ public class AppManager : MonoBehaviour
         ScaleGUI.SetActive(!ScaleGUI.activeSelf);
         DistGUI.SetActive(!DistGUI.activeSelf);
         ColorGUI.SetActive(!ColorGUI.activeSelf);
+
+        if(actionMode == 2 || tempActionMode == 2)
+        {
+            HighlightGUI.SetActive(!HighlightGUI.activeSelf);
+        }
+        else
+        {
+            HighlightGUI.SetActive(false);
+        }
     }
 }
