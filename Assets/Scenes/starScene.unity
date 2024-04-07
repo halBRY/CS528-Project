@@ -209,6 +209,21 @@ PrefabInstance:
       propertyPath: navMode
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012058711088, guid: c1621f4dd1e8c2748a5a423aa7736d55,
+        type: 3}
+      propertyPath: freeFlyButton
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012058711088, guid: c1621f4dd1e8c2748a5a423aa7736d55,
+        type: 3}
+      propertyPath: globalSpeedMod
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012058711088, guid: c1621f4dd1e8c2748a5a423aa7736d55,
+        type: 3}
+      propertyPath: flyMovementScale
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4000013277262070, guid: c1621f4dd1e8c2748a5a423aa7736d55, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.6
@@ -275,6 +290,11 @@ PrefabInstance:
         type: 3}
       propertyPath: renderMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000010245051402, guid: c1621f4dd1e8c2748a5a423aa7736d55,
+        type: 3}
+      propertyPath: far clip plane
+      value: 2000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1621f4dd1e8c2748a5a423aa7736d55, type: 3}
@@ -1071,7 +1091,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 81538cd9a8846c44893b4a69f1ea4af2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 81538cd9a8846c44893b4a69f1ea4af2,
         type: 3}
@@ -1578,6 +1598,7 @@ MonoBehaviour:
   myHeadTrack: {fileID: 1043299042}
   myConstellations: {fileID: 1512410795}
   myStars: {fileID: 1709699807}
+  menu: {fileID: 1500715829}
   StaticGUI: {fileID: 810805297}
   TimeGUI: {fileID: 764071136}
   ScaleGUI: {fileID: 861219622}
@@ -4517,6 +4538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wandPointing: 0
   wandTouching: 0
+  myPlayer: {fileID: 937609221}
   grabbed: 0
   grabButton: 2
   grabStyle: 0
@@ -4902,6 +4924,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AllowSwitchOff: 0
+--- !u!1 &1500715829 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1000011884111856, guid: c1621f4dd1e8c2748a5a423aa7736d55,
+    type: 3}
+  m_PrefabInstance: {fileID: 9161396}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1504850693
 GameObject:
   m_ObjectHideFlags: 0

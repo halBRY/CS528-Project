@@ -13,7 +13,7 @@ public class DrawLinksAsMesh : MonoBehaviour
 
     public TextAsset starData;
 
-    public float scaleFactor = 0.30478512648f; //Default to meters -> feet
+    public float scaleFactor = 1f; //Default to meters -> feet
     public float parsecPerYearConversion = 0.00000102269f;
 
     public float frameNumber;

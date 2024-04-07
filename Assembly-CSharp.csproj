@@ -200,6 +200,7 @@
      <None Include="Assets\module-omicron\CAVE2\Shaders\CAVE2-UI Default.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
      <None Include="Assets\module-omicron\Shaders\3D Text (Billboard).shader" />
+     <None Include="Assets\Scripts\addToPointCloudDiskShader.txt" />
      <None Include="Assets\module-omicron\CAVE2\Examples\Generalized Perspective Projection\Shaders\StereoscopicShader.shader" />
      <None Include="Assets\module-omicron\Shaders\Transparent-Self-Illumin.shader" />
      <None Include="Assets\module-omicron\CAVE2\Shaders\CAVE2-UI Default Font.shader" />
@@ -207,6 +208,7 @@
      <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
      <None Include="Assets\Resources\constellationship_zulu.txt" />
+     <None Include="Assets\Scripts\addToPointCloudCustomVertData.txt" />
      <None Include="Assets\Resources\constellations_2.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
      <None Include="Assets\module-omicron\Shaders\Font (Billboard).shader" />

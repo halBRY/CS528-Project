@@ -31,6 +31,8 @@ using System.Collections;
 public class ModifiedGrabbable : CAVE2Interactable {
 
     public enum HoldingStyle { ButtonPress, ButtonHold };
+    public GameObject myPlayer;
+    private CAVE2WandNavigator myNav;
 
     [SerializeField]
     bool grabbed;
@@ -101,6 +103,8 @@ public class ModifiedGrabbable : CAVE2Interactable {
 
     private void Start()
     {
+        myNav = myPlayer.GetComponent<CAVE2WandNavigator>();
+
         // Visuals
         pointingOverHighlight = new GameObject("wandHighlight");
         pointingOverHighlight.transform.parent = transform;
@@ -252,6 +256,7 @@ public class ModifiedGrabbable : CAVE2Interactable {
 
     void OnWandGrab()
     {
+        myNav.enabled = false;
         if (GetComponent<Rigidbody>() && transform.parent != grabber )
         {
             // Check if grabbing object already is grabbing something else
@@ -301,6 +306,7 @@ public class ModifiedGrabbable : CAVE2Interactable {
 
         grabbed = false;
         wasGrabbed = true;
+        myNav.enabled = true;
     }
 
 

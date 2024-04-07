@@ -13,7 +13,7 @@ public class PointCloudCustomVertData : MonoBehaviour
     public bool capStars;
     public int maxStarNum;
 
-    public float scaleFactor = 0.30478512648f; //Default to meters -> feet
+    public float scaleFactor = 1f; //Default to meters -> feet
     public float parsecPerYearConversion = 0.00000102269f;
 
     public TextAsset starData;

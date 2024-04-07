@@ -98,7 +98,6 @@ Shader "PointCloud/DiskPoint" {
 
 				float dist = inputObj[0].data.x;
 
-				// Controls perspective
 				dist = (_ScaleFactor + (1 - _ScaleFactor) * dist) / 2.0;
 
 				geomOut outputObj;
@@ -125,7 +124,7 @@ Shader "PointCloud/DiskPoint" {
 					}
 
 					for (int i = 0; i < 3; i++) {
-						outputObj.pos = inputObj[0].pos + float4(p[i], 0, 0) * dist;
+						outputObj.pos = inputObj[0].pos + float4(p[i], 0, 0) * 0.5;// * dist;
 						OutputStream.Append(outputObj);
 					}
 
@@ -139,13 +138,13 @@ Shader "PointCloud/DiskPoint" {
 				_Brightness = 0.2;
 				// A greater distance means a darker color
 				float4 tintColor = float4(_Brightness,_Brightness,_Brightness, 1);
-				float dist = distance(_WorldSpaceCameraPos, inputObj.posWorld);
+				float dist = distance(_WorldSpaceCameraPos, mul(unity_ObjectToWorld,inputObj.posWorld));
 
 				float4 newColor = inputObj.color * tintColor;
 
 				//return inputObj.color;
 
-				return lerp(inputObj.color, newColor, (dist/400));
+				return lerp(inputObj.color, newColor, (dist/1500));
 			}
 			ENDCG
 		}
