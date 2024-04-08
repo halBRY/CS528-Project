@@ -192,7 +192,6 @@
      <None Include="Assets\Resources\names\modern_constellation_names.txt" />
      <None Include="Assets\Resources\names\romanian_constellation_names_no_english.txt" />
      <None Include="Assets\module-omicron\Shaders\Transparent-InvisibleShadowCaster.shader" />
-     <None Include="Assets\Resources\constellations_korean.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
      <None Include="Assets\Resources\names\arabic_constellation_names.txt" />
      <None Include="Assets\module-omicron\CAVE2\Shaders\CAVE2-UI Default.shader" />
