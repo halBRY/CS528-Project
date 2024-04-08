@@ -142,8 +142,6 @@ Shader "PointCloud/DiskPoint" {
 
 				float4 newColor = inputObj.color * tintColor;
 
-				//return inputObj.color;
-
 				return lerp(inputObj.color, newColor, (dist/1500));
 			}
 			ENDCG

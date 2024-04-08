@@ -13,8 +13,9 @@ public class PointCloudCustomVertData : MonoBehaviour
     public bool capStars;
     public int maxStarNum;
 
-    public float scaleFactor = 1f; //Default to meters -> feet
+    public float scaleFactor = 0.30479999024f; //Default to meters -> feet
     public float parsecPerYearConversion = 0.00000102269f;
+    public float liveScale = 1f;
 
     public TextAsset starData;
 
@@ -61,6 +62,17 @@ public class PointCloudCustomVertData : MonoBehaviour
         return scaleFactor;
     }
 
+    public float getLiveScale()
+    {
+        return liveScale;
+    }
+
+    public void ResetLiveScale()
+    {
+        liveScale = 1f;
+        gameObject.transform.localScale = new Vector3(liveScale, liveScale, liveScale);
+    }
+
     // 0 = forward in time
     // 1 = backward in time
     public void updateFrameNumber(int direction)
@@ -92,6 +104,21 @@ public class PointCloudCustomVertData : MonoBehaviour
         {
             scaleFactor += 0.05f;
             meshRenderer.material.SetFloat("_ParsecScaleFactor", scaleFactor);
+        }
+    }
+
+    public void updateLiveScale(int direction)
+    {
+        if(direction == 0)
+        {
+            liveScale -= 0.05f;
+            gameObject.transform.localScale = new Vector3(liveScale, liveScale, liveScale);
+        }
+
+        if(direction == 1)
+        {
+            liveScale += 0.05f;
+            gameObject.transform.localScale = new Vector3(liveScale, liveScale, liveScale);
         }
     }
 
@@ -181,10 +208,6 @@ public class PointCloudCustomVertData : MonoBehaviour
             {
                 checkSpect = 'G'; 
             }
-            else if(checkSpect == 'D') //white dwarf
-            {
-                checkSpect = 'F'; 
-            }
             else if(checkSpect == 'R' || checkSpect == 'N' || checkSpect == 'S') //cool giant
             {
                 checkSpect = 'M';
@@ -210,6 +233,10 @@ public class PointCloudCustomVertData : MonoBehaviour
                 case 'O':
                     myColor = new Color(146, 181, 255);
                     myRadius = 6.6f;
+                    break;
+                case 'D':
+                    myColor = new Color(146, 181, 255);
+                    myRadius = 0.1f;
                     break;
                 case 'B':
                     myColor = new Color(191, 213, 255);

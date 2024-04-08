@@ -12,9 +12,11 @@ public class DrawLinksAsMesh : MonoBehaviour
     public MeshFilter meshFilter;
 
     public TextAsset starData;
+    public TextAsset nameData;
 
-    public float scaleFactor = 1f; //Default to meters -> feet
+    public float scaleFactor = 0.30479999024f; //Default to meters -> feet
     public float parsecPerYearConversion = 0.00000102269f;
+    public float liveScale = 1f;
 
     public float frameNumber;
 
@@ -28,6 +30,8 @@ public class DrawLinksAsMesh : MonoBehaviour
     public int highlightID;
 
     public int[] constellationSubMeshIds;
+    public string[] constellationNames;
+    public string[] constellationNamesOther;
 
     public AppManager appManager;
 
@@ -36,13 +40,19 @@ public class DrawLinksAsMesh : MonoBehaviour
     {
         meshFilter = gameObject.AddComponent<MeshFilter>();
 
-        DrawConstellations("constellations_2");
+        DrawConstellations("constellations_2", "modern_constellation_names");
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    public void ResetLiveScale()
+    {
+        liveScale = 1f;
+        gameObject.transform.localScale = new Vector3(liveScale, liveScale, liveScale);
     }
 
     // 0 = forward in time
@@ -79,6 +89,21 @@ public class DrawLinksAsMesh : MonoBehaviour
         }
     }
 
+    public void updateLiveScale(int direction)
+    {
+        if(direction == 0)
+        {
+            liveScale -= 0.05f;
+            gameObject.transform.localScale = new Vector3(liveScale, liveScale, liveScale);
+        }
+
+        if(direction == 1)
+        {
+            liveScale += 0.05f;
+            gameObject.transform.localScale = new Vector3(liveScale, liveScale, liveScale);
+        }
+    }
+
     public void hideLines()
     {
         meshRenderer.enabled = !meshRenderer.enabled;
@@ -97,15 +122,31 @@ public class DrawLinksAsMesh : MonoBehaviour
         List<Color> colors = new List<Color>();
 
         for(int i = 0; i < Mesh.vertices.Length; i++)
-        {
-            // Not selected constellation
-            if(i < constellationSubMeshIds[ID] || i >= constellationSubMeshIds[ID + 1])
+        {   
+            //Final constellation
+            if(ID == constellationSubMeshIds.Length - 1)
             {
-                colors.Add(DimColor);
+                // Not selected constellation
+                if(i < constellationSubMeshIds[ID])
+                {
+                    colors.Add(DimColor);
+                }
+                else
+                {
+                    colors.Add(HighlightColor);
+                }
             }
             else
             {
-                colors.Add(HighlightColor);
+                // Not selected constellation
+                if(i < constellationSubMeshIds[ID] || i >= constellationSubMeshIds[ID + 1])
+                {
+                    colors.Add(DimColor);
+                }
+                else
+                {
+                    colors.Add(HighlightColor);
+                }
             }
         }
         
@@ -179,7 +220,7 @@ public class DrawLinksAsMesh : MonoBehaviour
         Mesh.SetIndices(indicesArr, MeshTopology.Lines, 0);
     }
 
-    public void DrawConstellations(string fileName)
+    public void DrawConstellations(string fileName, string namesFile)
     {
         //Lines mesh
         Mesh = new Mesh();
@@ -194,8 +235,10 @@ public class DrawLinksAsMesh : MonoBehaviour
         // Read in CSV
         // Each line is a constellation
         starData = Resources.Load<TextAsset>(fileName);
+        nameData = Resources.Load<TextAsset>("names/" + namesFile);
 
         string[] lines = starData.text.Split('\n');
+        string[] nameLines = nameData.text.Split('\n');
 
         List<int> indices = new List<int>();
         List<Vector3> vertices = new List<Vector3>();
@@ -206,12 +249,27 @@ public class DrawLinksAsMesh : MonoBehaviour
         bool DropThisLine = false;
         int linesAdded = 0;
 
-        constellationSubMeshIds = new int[lines.Length];
+        constellationSubMeshIds = new int[lines.Length - 1];
+        constellationNames = new string[nameLines.Length - 1];
+        constellationNamesOther = new string[nameLines.Length - 1];
 
         // For each constellations, extract pairs of verts for lines
-        for(int i = 0; i < lines.Length; i++)
+        for(int i = 0; i < lines.Length - 1; i++)
         //for(int i = testNum; i < testNum+1; i++)
         {
+            string[] nameStrings = nameLines[i].Split('_');
+
+            string myName = nameStrings[1].Replace("(", "").Replace(")", "");
+            myName = myName.Trim('"');
+
+            string[] OtherNames = nameStrings[0].Split('"');
+            string myOtherName = OtherNames[1];
+
+            //Debug.Log(i + "'s name is " + myName);
+
+            constellationNames[i] = myName;
+            constellationNamesOther[i] = myOtherName;
+
             //track submesh id
             constellationSubMeshIds[i] = linesAdded * 2;
 
