@@ -310,6 +310,9 @@ public class AppManager : MonoBehaviour
 
         if(actionMode == 2)
         {
+            numberText.UpdateText();
+            nameText.UpdateText();
+            nameTextOther.UpdateText();
             myConstellations.showHighlight(highlightID);
         }
         
@@ -390,12 +393,10 @@ public class AppManager : MonoBehaviour
 
     public void UpdateConstSetModern(bool toggle)
     {
+        Debug.Log("Push");
         myConstellations.clearMeshData();
         myConstellations.DrawConstellations(constSets[0].name, constNames[0].name);
         constSetID = 0;
-        numberText.UpdateText();
-        nameText.UpdateText();
-        nameTextOther.UpdateText();
     }
 
     public void UpdateConstSetKorean(bool toggle)
@@ -403,9 +404,6 @@ public class AppManager : MonoBehaviour
         myConstellations.clearMeshData();
         myConstellations.DrawConstellations(constSets[1].name, constNames[1].name);
         constSetID = 1;
-        numberText.UpdateText();
-        nameText.UpdateText();
-        nameTextOther.UpdateText();
     }
 
     public void UpdateConstSetArabic(bool toggle)
@@ -413,9 +411,6 @@ public class AppManager : MonoBehaviour
         myConstellations.clearMeshData();
         myConstellations.DrawConstellations(constSets[2].name, constNames[2].name);
         constSetID = 2;
-        numberText.UpdateText();
-        nameText.UpdateText();
-        nameTextOther.UpdateText();
     }
 
     public void UpdateConstSetChinese(bool toggle)
@@ -423,9 +418,6 @@ public class AppManager : MonoBehaviour
         myConstellations.clearMeshData();
         myConstellations.DrawConstellations(constSets[3].name, constNames[3].name);
         constSetID = 3;
-        numberText.UpdateText();
-        nameText.UpdateText();
-        nameTextOther.UpdateText();
     }
 
     public void UpdateConstSetRomanian(bool toggle)
@@ -433,9 +425,6 @@ public class AppManager : MonoBehaviour
         myConstellations.clearMeshData();
         myConstellations.DrawConstellations(constSets[4].name, constNames[4].name);
         constSetID = 4;
-        numberText.UpdateText();
-        nameText.UpdateText();
-        nameTextOther.UpdateText();
     }
 
     public void UpdateConstSetSami(bool toggle)
@@ -443,9 +432,6 @@ public class AppManager : MonoBehaviour
         myConstellations.clearMeshData();
         myConstellations.DrawConstellations(constSets[5].name, constNames[5].name);
         constSetID = 5;
-        numberText.UpdateText();
-        nameText.UpdateText();
-        nameTextOther.UpdateText();
     }
 
     public void UpdateConstSetXhosa(bool toggle)
@@ -453,9 +439,6 @@ public class AppManager : MonoBehaviour
         myConstellations.clearMeshData();
         myConstellations.DrawConstellations(constSets[6].name, constNames[6].name);
         constSetID = 6;
-        numberText.UpdateText();
-        nameText.UpdateText();
-        nameTextOther.UpdateText();
     }
 
     public void UpdateConstSetZulu(bool toggle)
@@ -463,9 +446,6 @@ public class AppManager : MonoBehaviour
         myConstellations.clearMeshData();
         myConstellations.DrawConstellations(constSets[7].name, constNames[7].name);
         constSetID = 7;
-        numberText.UpdateText();
-        nameText.UpdateText();
-        nameTextOther.UpdateText();
     }
 
     public void UpdateActionTime(bool toggle)
@@ -506,6 +486,9 @@ public class AppManager : MonoBehaviour
         SpotlightGUI.SetActive(true);
         spotlight.gameObject.SetActive(true);
         spotlight.UpdateText(0);
+        constSetID = 0;
+        myConstellations.clearMeshData();
+        myConstellations.DrawConstellations(constSets[0].name, constNames[0].name);
     }
 
     public void ToggleAllGUI()

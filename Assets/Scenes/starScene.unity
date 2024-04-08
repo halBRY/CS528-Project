@@ -1727,9 +1727,9 @@ MonoBehaviour:
   HighlightGUI: {fileID: 8296172669394104804}
   highlight: {fileID: 1343513887}
   SpotlightGUI: {fileID: 800041263}
-  numberText: {fileID: 0}
-  nameText: {fileID: 0}
-  nameTextOther: {fileID: 0}
+  numberText: {fileID: 1945723181}
+  nameText: {fileID: 1290765475}
+  nameTextOther: {fileID: 651126314}
   dipperText: {fileID: 1402967908}
   setText: {fileID: 360166584}
   ColorGUI: {fileID: 35328557}
@@ -2525,8 +2525,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 0.2
-  m_fontSizeBase: 0.2
+  m_fontSize: 0.1
+  m_fontSizeBase: 0.1
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3093,8 +3093,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 0.15
-  m_fontSizeBase: 0.15
+  m_fontSize: 0.1
+  m_fontSizeBase: 0.1
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4402,8 +4402,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 0.15
-  m_fontSizeBase: 0.15
+  m_fontSize: 0.1
+  m_fontSizeBase: 0.1
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4832,7 +4832,7 @@ TextMesh:
   m_GameObject: {fileID: 1290765473}
   m_Text: Hello World
   m_OffsetZ: 0
-  m_CharacterSize: 0.5
+  m_CharacterSize: 0.4
   m_LineSpacing: 1
   m_Anchor: 4
   m_Alignment: 0
@@ -5126,7 +5126,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1343513888
 Transform:
   m_ObjectHideFlags: 0
@@ -21199,4 +21199,4 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
