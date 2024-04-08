@@ -186,7 +186,6 @@
      <Compile Include="Assets\Scripts\SpotlightManager.cs" />
      <Compile Include="Assets\Scripts\TextUpdate.cs" />
      <Compile Include="Assets\Scripts\TextUpdateSpotlight.cs" />
-     <Compile Include="Assets\transformFix.cs" />
      <None Include="Assets\Resources\names\korean_constellation_names.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />

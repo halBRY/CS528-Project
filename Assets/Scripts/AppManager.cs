@@ -14,6 +14,8 @@ public class AppManager : MonoBehaviour
     public PointCloudCustomVertData myStars;
     public SpotlightManager spotlight;
 
+    public GameObject solRings;
+
     public GameObject menu;
 
     public GameObject StaticGUI;
@@ -501,6 +503,7 @@ public class AppManager : MonoBehaviour
         ScaleGUI.SetActive(!ScaleGUI.activeSelf);
         DistGUI.SetActive(!DistGUI.activeSelf);
         ColorGUI.SetActive(!ColorGUI.activeSelf);
+        solRings.SetActive(!solRings.activeSelf);
 
         if(actionMode == 2 || tempActionMode == 2)
         {
