@@ -4,6 +4,7 @@ Shader "PointCloud/DiskPoint" {
         _frameNumber("Frame Number", Float) = 0
 		_isSpect("Color by Spectral Type", float) = 1
 		_Brightness("Brightness", float) = 1
+		_isBack("Back Wall", float) = 0
 	}
 	SubShader{
 		LOD 200
@@ -87,6 +88,7 @@ Shader "PointCloud/DiskPoint" {
 			float _ScaleFactor;
 			float _NumPolys;
 			float _Rotation;
+			float _isBack;
 			[maxvertexcount(48)]
 			void geom(point vertexOut inputObj[1], inout TriangleStream<geomOut> OutputStream)
 			{
@@ -109,6 +111,12 @@ Shader "PointCloud/DiskPoint" {
 				p[0] = float2(0, 0);
 				float xyscale = _ScreenParams.y / _ScreenParams.x;
 				float angleOffset = _Rotation / 180 * 3.14159;
+
+				//Fix size on back wall
+				if(_isBack == 1)
+				{
+					_Radius = _Radius * 8;
+				}
 
 				p[2] = float2(_Radius* xyscale*cos(angleOffset), _Radius*sin(angleOffset));
 				float twopion = 2.0 * 3.14159 / nTriangles;

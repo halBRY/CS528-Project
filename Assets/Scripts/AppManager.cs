@@ -131,8 +131,8 @@ public class AppManager : MonoBehaviour
 
         //Allow for "Quick Actions" when M or L1 is held down
         //Quick Actions correspond to actionMode 3
-        if(Input.GetKeyDown(KeyCode.M))
-        //if(CAVE2.GetButtonDown(CAVE2.Button.Button5))
+        //if(Input.GetKeyDown(KeyCode.M))
+        if(CAVE2.GetButtonDown(CAVE2.Button.Button5))
         {
             //Debug.Log("Setting mode to 3, holding mode " + actionMode);
             tempActionMode = actionMode;
@@ -140,8 +140,8 @@ public class AppManager : MonoBehaviour
         }
 
         
-        if(Input.GetKeyUp(KeyCode.M))
-        //if(CAVE2.GetButtonUp(CAVE2.Button.Button5))
+        //if(Input.GetKeyUp(KeyCode.M))
+        if(CAVE2.GetButtonUp(CAVE2.Button.Button5))
         {
             //Debug.Log("Setting action mode back to " + tempActionMode);
             actionMode = tempActionMode;
@@ -156,8 +156,8 @@ public class AppManager : MonoBehaviour
         // 1 - increase scale
         // 2 - cycle through constellations
         // 3 - toggle GUI elements
-        if(Input.GetKeyDown(KeyCode.X))
-        //if(CAVE2.GetButtonDown(CAVE2.Button.ButtonRight))
+        //if(Input.GetKeyDown(KeyCode.X))
+        if(CAVE2.GetButtonDown(CAVE2.Button.ButtonRight))
         {
             switch (actionMode)
             {
@@ -196,8 +196,8 @@ public class AppManager : MonoBehaviour
         // 1 - decrease scale
         // 2 - cycle through constellations
         // 3 - toggle constellation lines elements
-        if(Input.GetKeyDown(KeyCode.Z))
-        //if(CAVE2.GetButtonDown(CAVE2.Button.ButtonLeft))
+        //if(Input.GetKeyDown(KeyCode.Z))
+        if(CAVE2.GetButtonDown(CAVE2.Button.ButtonLeft))
         {
             switch (actionMode)
             {
@@ -236,8 +236,8 @@ public class AppManager : MonoBehaviour
         // 1 - change distance from sol units
         // 2 - if spotlighting, cycle through skycultures
         // 3 - reset position
-        if(Input.GetKeyDown(KeyCode.C))
-        //if(CAVE2.GetButtonDown(CAVE2.Button.ButtonUp))
+        //if(Input.GetKeyDown(KeyCode.C))
+        if(CAVE2.GetButtonDown(CAVE2.Button.ButtonUp))
         {
             switch (actionMode)
             {
@@ -279,8 +279,8 @@ public class AppManager : MonoBehaviour
         // 1 - reset scale to default
         // 2 - if spotlighting, jump to pos
         // 3 - update color scale
-        if(Input.GetKeyDown(KeyCode.V))
-        //if(CAVE2.GetButtonDown(CAVE2.Button.ButtonDown))
+        //if(Input.GetKeyDown(KeyCode.V))
+        if(CAVE2.GetButtonDown(CAVE2.Button.ButtonDown))
         {
             switch (actionMode)
             {

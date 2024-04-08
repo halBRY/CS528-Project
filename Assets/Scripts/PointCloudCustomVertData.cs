@@ -49,6 +49,16 @@ public class PointCloudCustomVertData : MonoBehaviour
         meshRenderer.material.SetFloat("_ParsecScaleFactor", scaleFactor);
         meshRenderer.material.SetFloat("_frameNumber", frameNumber);
         meshRenderer.material.SetFloat("_isSpect", isSpect);
+
+        //Check if backwall
+        if(CAVE2Manager.GetMachineName() == "ORION")
+        {
+           meshRenderer.material.SetFloat("_isBack", 1);
+        }
+        else 
+        {
+            meshRenderer.material.SetFloat("_isBack", 0);
+        }
     }
 
     //Return the current frame
