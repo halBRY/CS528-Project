@@ -457,6 +457,8 @@ public class AppManager : MonoBehaviour
     {
         actionMode = 0;
         myConstellations.hideHighlight();
+        SpotlightGUI.SetActive(false);
+        SpotlightPanel.SetActive(false);
     }
 
     public void UpdateActionScale(bool toggle)
@@ -464,6 +466,8 @@ public class AppManager : MonoBehaviour
         actionMode = 1;
         isPaused = true;
         myConstellations.hideHighlight();
+        SpotlightGUI.SetActive(false);
+        SpotlightPanel.SetActive(false);
     }
 
     public void UpdateActionHighlight(bool toggle)
@@ -472,6 +476,8 @@ public class AppManager : MonoBehaviour
         isPaused = true;
         HighlightGUI.SetActive(true);
         highlight.SetActive(true);
+        SpotlightGUI.SetActive(false);
+        SpotlightPanel.SetActive(false);
     }
 
     public void UpdateActionQuick(bool toggle)
