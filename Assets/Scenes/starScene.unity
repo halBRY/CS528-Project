@@ -10019,7 +10019,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000010949173356
 GameObject:
   m_ObjectHideFlags: 0
@@ -10843,7 +10843,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000012650824270
 GameObject:
   m_ObjectHideFlags: 0
@@ -14383,7 +14383,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Project Title
+  m_Text: Immersive Stars and Skycultures
 --- !u!114 &114000010535076778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14784,22 +14784,18 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tempus sed
-    tellus sed congue. Aliquam erat volutpat. Nam urna est, bibendum sed congue id,
-    fringilla et metus. Etiam mattis nunc at metus aliquet egestas. Curabitur pellentesque
-    lectus sed elit porttitor suscipit. Vivamus varius tortor sed diam finibus, sed
-    interdum metus dictum. Donec tellus risus, egestas in malesuada sed, venenatis
-    vel erat.\r\n\r\nQuisque id erat ultricies, egestas mi at, luctus neque. Suspendisse
-    imperdiet semper augue, nec accumsan ipsum commodo quis. Praesent eget nulla et
-    leo congue rutrum in nec lectus. Donec varius, turpis vitae rhoncus tempus, elit
-    urna volutpat orci, at venenatis lorem quam id sapien. Nam varius enim et massa
-    vulputate, ac scelerisque neque egestas. Phasellus laoreet laoreet nibh, ut fermentum
-    nunc congue nec. Nullam tristique commodo tincidunt. Nam ut nunc hendrerit ex
-    tristique sollicitudin. Aliquam tempor interdum sagittis. In non nunc eget nunc
-    efficitur interdum sit amet quis tellus. Sed porta tortor eu faucibus tristique.
-    Morbi cursus iaculis rutrum. Quisque non vestibulum tellus. Proin fringilla ipsum
-    sapien, vitae porttitor orci bibendum facilisis. Donec lobortis, erat sit amet
-    tempor vehicula, enim erat dictum tortor, non blandit risus tortor ut neque.\r\n\r\n"
+  m_Text: "Immersive Stars and Skycultures is an immersive astronomy visualization\r
+    created by Hal Brynteson using data from the HIPPARCOS archive, Stellarium, and\r
+    NASA Exoplanet archive. This application shows the locations of  nearly 400,000\r
+    stars surrounding our solar system, as well as the size, temperature, and discovered\r
+    exoplanets of these stars.\n\nIn addition to the stars, Immersive Stars and Skycultures\r
+    also features several sets of constellations from various modern and historic\r
+    cultures. Names of these constellations can be viewed in both the english translation,\r
+    and the original language names when available. Data for constellation links and\r
+    names comes from Stellarium. \n\nFinally, this application spotlights a single\r
+    asterism, the Big Dipper, as it appears across 6 different skycultures. In this\r
+    spotlight, users can access some information about that constellation in its respecitve\r
+    culture, as well as see how the Big Dipper changes over time."
 --- !u!114 &114000011176488126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14986,11 +14982,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Author 1
-
-    Author 2
-
-    Author 3'
+  m_Text: Hal Brynteson
 --- !u!114 &114000011501471690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15217,9 +15209,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'CS 491 - Virtual and Augmented Reality
+  m_Text: 'CS 528 - Virtual Reality
 
-    Fall 2018
+    Spring 2024
 
     University of Illinois at Chicago'
 --- !u!114 &114000011781693098
@@ -15377,9 +15369,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Hold the bottom trigger (L2) and move the wand in the direction to fly or
-    use the analog stick to move. Circle (O) to open menu/select. Cross (X) to close
-    menu. DPad to navigate menu.
+  m_Text: 'Hold the bottom trigger (L2) and move the wand in the direction to fly
+    or use the analog stick to move. Circle (O) to open menu/select. Cross (X) to
+    close menu. DPad to navigate menu.
+
+
+    DPad is mapped to "Action Modes", with the default being Time steps.'
 --- !u!114 &114000012013345228
 MonoBehaviour:
   m_ObjectHideFlags: 0
