@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿/*******************************************
+Written by Hal Brynteson for CS 528 
+*******************************************/
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -39,34 +42,28 @@ public class PointCloudCustomVertData : MonoBehaviour
 		meshRenderer = gameObject.AddComponent<MeshRenderer>();
 		meshRenderer.material = pointCloudMaterial;
 
+        //Read in full star data with exo planet data
         VertsFromCSV("athyg_v31_cleaned_exo_all_stars");
 
+        //Set uniforms
         meshRenderer.material.SetFloat("_ParsecScaleFactor", scaleFactor);
         meshRenderer.material.SetFloat("_frameNumber", frameNumber);
         meshRenderer.material.SetFloat("_isSpect", isSpect);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    //Return the current frame
     public float getFrameNumber()
     {
         return frameNumber;
     }
 
-    public float getScaleFactor()
-    {
-        return scaleFactor;
-    }
-
+    //Return the current scaling factor
     public float getLiveScale()
     {
         return liveScale;
     }
 
+    //Reset scale to 1
     public void ResetLiveScale()
     {
         liveScale = 1f;
@@ -122,6 +119,7 @@ public class PointCloudCustomVertData : MonoBehaviour
         }
     }
 
+    //Switch color scale uniform 
     public void updateColorScale()
     {
         if(isSpect == 0)
@@ -135,6 +133,7 @@ public class PointCloudCustomVertData : MonoBehaviour
         meshRenderer.material.SetFloat("_isSpect", isSpect);
     }
 
+    //Read in Data
     private void VertsFromCSV(string fileName)
     {
         Renderer rend = GetComponent<Renderer>();
@@ -150,7 +149,6 @@ public class PointCloudCustomVertData : MonoBehaviour
 
         //remove header
         int starsToAdd = size - 2;
-
         
         int[] indices = new int[starsToAdd-1];
 
@@ -159,7 +157,7 @@ public class PointCloudCustomVertData : MonoBehaviour
         List<Vector3> normals = new List<Vector3>();
         List<Vector4> uv = new List<Vector4>();
 
-        // Show limited number of stars
+        // Show limited number of stars for debugging
         if(capStars)
         {
             starsToAdd = maxStarNum;
@@ -234,7 +232,7 @@ public class PointCloudCustomVertData : MonoBehaviour
                     myColor = new Color(146, 181, 255);
                     myRadius = 6.6f;
                     break;
-                case 'D':
+                case 'D': //White dwarfs
                     myColor = new Color(146, 181, 255);
                     myRadius = 0.1f;
                     break;
@@ -266,7 +264,7 @@ public class PointCloudCustomVertData : MonoBehaviour
                     myColor = new Color(255, 124, 91);
                     myRadius = 3.5f;
                     break;
-                case 'P':
+                case 'P': //Peculiar class
                     myColor = new Color(231, 210, 255);
                     myRadius = 1.0f;
                     break;
@@ -276,6 +274,7 @@ public class PointCloudCustomVertData : MonoBehaviour
                     break;
             }
 
+            //Get exoplanet color scale colors
             float exoNum;
             float result;
 

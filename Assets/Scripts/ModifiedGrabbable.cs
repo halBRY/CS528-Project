@@ -25,6 +25,10 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *************************************************************************************************/
  
+/*******************************************
+Modified by Hal Brynteson for CS 528 
+*******************************************/
+
 using UnityEngine;
 using System.Collections;
 

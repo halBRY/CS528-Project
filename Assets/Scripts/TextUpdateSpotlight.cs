@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿/*******************************************
+Written by Hal Brynteson for CS 528 
+*******************************************/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

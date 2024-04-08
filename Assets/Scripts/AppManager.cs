@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿/*******************************************
+Written by Hal Brynteson for CS 528 
+*******************************************/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +24,7 @@ public class AppManager : MonoBehaviour
     public GameObject highlight;
 
     public GameObject SpotlightGUI;
+    public GameObject SpotlightPanel;
 
     public TextUpdate numberText;
     public TextUpdate nameText;
@@ -68,9 +72,9 @@ public class AppManager : MonoBehaviour
     private bool distanceIsFeet = true;
     private bool isSpotlight = false;
 
-    // Start is called before the first frame update
     void Start()
     {
+        //Initialize GUI text
         timeText = TimeGUI.GetComponent<TMP_Text>();
         timeString = "Present";
 
@@ -80,14 +84,14 @@ public class AppManager : MonoBehaviour
         distText = DistGUI.GetComponent<TMP_Text>();
         distString = " ft. from Sol";
 
-        //Show skycultures with big dipper
+        //Initialize skycultures with big dipper
         dipperIDs = new int[6] {38, 218, 2, 38, 0, 1};
         setNames = new string[6] {"Modern", "Korean", "Indigenous Arabic", "Traditional Chinese", "Romanian", "Sami"};
     }
 
-    // Update is called once per frame
     void Update()
     {
+        //Get distance from Sol
         distance = Vector3.Distance(myPlayer.transform.position, new Vector3(0f, 1f, 0f)); //Sol location
 
         if(distanceIsFeet)
@@ -101,6 +105,7 @@ public class AppManager : MonoBehaviour
 
         distText.text = string.Format("{0:#.00}{1}", scaledDistance, distString);
 
+        //Update Time and Scale GUI text
         float myFrame = myStars.getFrameNumber();
     
         if(myFrame == 0)
@@ -120,8 +125,10 @@ public class AppManager : MonoBehaviour
 
         float myScale = myStars.getLiveScale();
         scaleText.text = string.Format("1ft. = {0:#.00} pc", myScale);
-        //scaleText.text = "1 ft. = " + myScale + " parsec";
 
+
+        //Allow for "Quick Actions" when M or L1 is held down
+        //Quick Actions correspond to actionMode 3
         if(Input.GetKeyDown(KeyCode.M))
         //if(CAVE2.GetButtonDown(CAVE2.Button.Button5))
         {
@@ -137,6 +144,10 @@ public class AppManager : MonoBehaviour
             //Debug.Log("Setting action mode back to " + tempActionMode);
             actionMode = tempActionMode;
         }
+
+        /**** D-PAD CONTROLS *****/
+        //Based on the actionMode, the d-pad will have different abilities
+
 
         //cave button right
         // 0 - forward in time
@@ -167,7 +178,6 @@ public class AppManager : MonoBehaviour
                         nameText.UpdateText();
                         nameTextOther.UpdateText();
                     }
-                    //Debug.Log("Highlight number " + highlightID);
                     break;
 
                 case 3:
@@ -208,7 +218,6 @@ public class AppManager : MonoBehaviour
                         nameText.UpdateText();
                         nameTextOther.UpdateText();
                     }
-                    //Debug.Log("Highlight number " + highlightID);
                     break;
 
                 case 3:
@@ -251,7 +260,6 @@ public class AppManager : MonoBehaviour
                     dipperText.UpdateText();
                     setText.UpdateText();
                     spotlight.UpdateText(constSetID);
-                    //Debug.Log("Highlight number " + highlightID);
                     break;
 
                 case 3:
@@ -284,8 +292,6 @@ public class AppManager : MonoBehaviour
                     break;
 
                 case 2:
-                    //UpdateHighlightID(1);
-                    //Debug.Log("Highlight number " + highlightID);
                     if(isSpotlight)
                     {
                         myPlayer.transform.position = dipperPos;
@@ -303,11 +309,13 @@ public class AppManager : MonoBehaviour
             }
         }
         
+        //If Big Dipper Spotlight is active, update highlighted constellation 
         if(isSpotlight)
         {
             highlightID = dipperIDs[constSetID];
         }
 
+        //If constellations are being highlighted, update the DrawLinksAsMesh object 
         if(actionMode == 2)
         {
             numberText.UpdateText();
@@ -322,23 +330,15 @@ public class AppManager : MonoBehaviour
             isPaused = true;
         }
 
+        //Play timesteps
         if(!isPaused)
         {
             myStars.updateFrameNumber(lastTimeDirection);
             myConstellations.updateFrameNumber(lastTimeDirection);
         }
-
-        /*
-        if(distance < 30)
-        {
-            RenderSettings.skybox = darkSky;
-        }
-        else
-        {
-            RenderSettings.skybox = darkSky;
-        }*/
     }
 
+    //Update the ID of the highlighted constellation for actionMode 2
     public void UpdateHighlightID(int direction)
     {
         int maxID = myConstellations.constellationNames.Length;
@@ -362,6 +362,7 @@ public class AppManager : MonoBehaviour
         }
     }
 
+    //Update the ID to track what constellation set is being shown
     public void UpdateConstID()
     {
         constSetID++; 
@@ -376,6 +377,7 @@ public class AppManager : MonoBehaviour
 
     }
 
+    //Update the color scale GUI to match what is shown by the PointCloudCustomVertData object
     public void UpdateColorGUI()
     {
         activeColorScale = !activeColorScale;
@@ -391,9 +393,10 @@ public class AppManager : MonoBehaviour
         }
     }
 
+    /***** TOGGLES AND MENU FUNCTIONS ******/
+
     public void UpdateConstSetModern(bool toggle)
     {
-        Debug.Log("Push");
         myConstellations.clearMeshData();
         myConstellations.DrawConstellations(constSets[0].name, constNames[0].name);
         constSetID = 0;
@@ -485,6 +488,7 @@ public class AppManager : MonoBehaviour
         highlight.SetActive(false);
         SpotlightGUI.SetActive(true);
         spotlight.gameObject.SetActive(true);
+        SpotlightPanel.SetActive(true);
         spotlight.UpdateText(0);
         constSetID = 0;
         myConstellations.clearMeshData();
@@ -503,14 +507,15 @@ public class AppManager : MonoBehaviour
             HighlightGUI.SetActive(!HighlightGUI.activeSelf);
             if(isSpotlight)
             {
-                SpotlightGUI.SetActive(!SpotlightGUI);
-                spotlight.gameObject.SetActive(!spotlight);
+                SpotlightGUI.SetActive(!SpotlightGUI.activeSelf);
+                SpotlightPanel.SetActive(!SpotlightPanel.activeSelf);
             }
         }
         else
         {
             HighlightGUI.SetActive(false);
             SpotlightGUI.SetActive(false);
+            SpotlightPanel.SetActive(false);
         }
     }
 }

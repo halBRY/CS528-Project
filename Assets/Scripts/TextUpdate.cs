@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿/*******************************************
+Written by Hal Brynteson for CS 528 
+*******************************************/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,24 +11,25 @@ public class TextUpdate : MonoBehaviour
     public AppManager appManager;
     public DrawLinksAsMesh myConstellations;
 
-    // Start is called before the first frame update
     void Awake()
     {
+        //Constellation Name
         if(myID == 0)
         {
             gameObject.GetComponent<TextMesh>().text = myConstellations.constellationNames[appManager.highlightID];
         }
+        // Constellation Number
         else if(myID == 1)
         {
             gameObject.GetComponent<TextMesh>().text = appManager.highlightID.ToString();
         }
+        //Constellation name in other language
         else
         {
             gameObject.GetComponent<TextMesh>().text = myConstellations.constellationNamesOther[appManager.highlightID];
         }
     }
 
-    // Update is called once per frame
     public void UpdateText()
     {
         if(myID == 0)
