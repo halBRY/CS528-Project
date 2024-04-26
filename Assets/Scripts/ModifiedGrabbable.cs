@@ -260,7 +260,7 @@ public class ModifiedGrabbable : CAVE2Interactable {
 
     void OnWandGrab()
     {
-        myNav.enabled = false;
+        //myNav.enabled = false;
         if (GetComponent<Rigidbody>() && transform.parent != grabber )
         {
             // Check if grabbing object already is grabbing something else
@@ -310,7 +310,7 @@ public class ModifiedGrabbable : CAVE2Interactable {
 
         grabbed = false;
         wasGrabbed = true;
-        myNav.enabled = true;
+        //myNav.enabled = true;
     }
 
 

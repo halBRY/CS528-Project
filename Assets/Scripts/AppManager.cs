@@ -459,6 +459,7 @@ public class AppManager : MonoBehaviour
         myConstellations.hideHighlight();
         SpotlightGUI.SetActive(false);
         SpotlightPanel.SetActive(false);
+        HighlightGUI.SetActive(false);
     }
 
     public void UpdateActionScale(bool toggle)
@@ -468,6 +469,7 @@ public class AppManager : MonoBehaviour
         myConstellations.hideHighlight();
         SpotlightGUI.SetActive(false);
         SpotlightPanel.SetActive(false);
+        HighlightGUI.SetActive(false);
     }
 
     public void UpdateActionHighlight(bool toggle)
